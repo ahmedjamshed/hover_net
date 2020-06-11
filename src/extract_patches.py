@@ -9,6 +9,7 @@ from misc.patch_extractor import PatchExtractor
 from misc.utils import rm_n_mkdir
 
 from config import Config
+import scipy.io as sio
 
 ###########################################################################
 if __name__ == '__main__':
@@ -33,8 +34,8 @@ if __name__ == '__main__':
 
     ### Paths to data - these need to be modified according to where the original data is stored
     img_ext = '.png'
-    img_dir = '../../../data/CoNSeP/train/Images/'
-    ann_dir = '../../../data/CoNSeP/train/Labels/' 
+    img_dir = '../../../data/CoNSeP/Train/Images/'
+    ann_dir = '../../../data/CoNSeP/Train/Labels/' 
     ####
     out_dir = "../../../CoNSeP/train/%dx%d_%dx%d" % \
                         (win_size[0], win_size[1], step_size[0], step_size[1])
