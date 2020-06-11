@@ -1,4 +1,4 @@
-
+import argparse
 import glob
 import os
 
@@ -13,6 +13,10 @@ import scipy.io as sio
 
 ###########################################################################
 if __name__ == '__main__':
+    
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--data', help="view dataset, received either 'train' or 'valid' as input")
+    args = parser.parse_args()
     
     cfg = Config()
 
@@ -34,11 +38,18 @@ if __name__ == '__main__':
 
     ### Paths to data - these need to be modified according to where the original data is stored
     img_ext = '.png'
-    img_dir = '../../../data/CoNSeP/Train/Images/'
-    ann_dir = '../../../data/CoNSeP/Train/Labels/' 
-    ####
-    out_dir = "../../../CoNSeP/train/%dx%d_%dx%d" % \
-                        (win_size[0], win_size[1], step_size[0], step_size[1])
+    if args.data == 'valid':
+        img_dir = '../../../data/CoNSeP/Test/Images/'
+        ann_dir = '../../../data/CoNSeP/Test/Labels/' 
+        ####
+        out_dir = "../../../CoNSeP/valid/%dx%d_%dx%d" % \
+                            (win_size[0], win_size[1], step_size[0], step_size[1])
+    else:
+        img_dir = '../../../data/CoNSeP/Train/Images/'
+        ann_dir = '../../../data/CoNSeP/Train/Labels/' 
+        ####
+        out_dir = "../../../CoNSeP/train/%dx%d_%dx%d" % \
+                            (win_size[0], win_size[1], step_size[0], step_size[1])
 
     file_list = glob.glob('%s/*%s' % (img_dir, img_ext))
     file_list.sort() 
